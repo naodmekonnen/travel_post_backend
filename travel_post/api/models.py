@@ -21,3 +21,28 @@ class CustomUser(AbstractUser):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class Post(models.Model):
+    body = models.CharField(max_length=550)
+    created_at = models.DateField(auto_now_add=True)
+    post_author = models.ForeignKey(CustomUser, on_delete=models.PROTECT, related_name='user_post')
+    category = models.CharField(max_length=225, default=None, blank=True, null=True)
+
+    def __str__ (self):
+        return self.body
+
+class Comment(models.Model):
+    comment_author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_comment')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    comment = models.CharField(max_length=1000)
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.comment
+
+class Follow(models.Model):
+    following = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, null=False, related_name='users_followed')
+    followers = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, null=False, related_name='users_following')
+    status = models.CharField(max_length=50)
+
