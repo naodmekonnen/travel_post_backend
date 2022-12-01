@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
+
 
 class CustomUser(AbstractUser):
     birthday = models.DateField(null=True)
@@ -44,5 +46,17 @@ class Comment(models.Model):
 class Follow(models.Model):
     following = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, null=False, related_name='users_followed')
     followers = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, null=False, related_name='users_following')
-    status = models.CharField(max_length=50)
+    # status = models.CharField(max_length=50)
+    created_at = models.DateField(auto_now_add=True, db_index=True, null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['following','followers'],  name="unique_followers")
+        ]
+
+        ordering = ["-created_at"]
+
+        def __str__(self):
+            return self.followers
+
 

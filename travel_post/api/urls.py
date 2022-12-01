@@ -6,7 +6,7 @@ router = routers.SimpleRouter()
 router.register(r'users', CustomUserViewSet)
 router.register(r'posts', PostViewSet)
 router.register(r'comments', CommentViewSet)
-# router.register(r'followers', FollowViewSet)
+router.register(r'followers', FollowViewSet)
 
 
 
