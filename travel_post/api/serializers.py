@@ -21,6 +21,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'followers',
             'following',
          ) 
+        
         extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, validated_data):
