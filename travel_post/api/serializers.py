@@ -43,7 +43,14 @@ class CommentSerializer(serializers.ModelSerializer):
     commented_by = serializers.ReadOnlyField(source='comment_author.username')
     class Meta:
         model = Comment
-        fields = ('id','comment','comment_author','created_at', 'post','commented_by')
+        fields = (
+                'id',
+                'comment',
+                'comment_author',
+                'created_at', 
+                'post',
+                'commented_by'
+                )
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -63,13 +70,20 @@ class PostSerializer(serializers.ModelSerializer):
 class FollowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
-        fields = ('following', 'followers')
+        fields = (
+                'following', 
+                'followers'
+                )
 
 
 class FollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
-        fields = ('id','followers','created_at')
+        fields = (
+                'id',
+                'followers',
+                'created_at'
+                )
 
 
 class FollowerSerializer(serializers.ModelSerializer):

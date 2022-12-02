@@ -22,7 +22,6 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(post_author=self.request.user)
 
 
-
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
