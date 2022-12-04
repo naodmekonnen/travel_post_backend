@@ -1,13 +1,16 @@
 from rest_framework import serializers
 from .models import *
-# from django.contrib.auth import get_user_model
 
-# User = get_user_model()
 
 class CustomUserSerializer(serializers.ModelSerializer):
 
     followers = serializers.SerializerMethodField()
     following = serializers.SerializerMethodField()
+    email = serializers.EmailField(required=True)
+    username = serializers.CharField()
+    password = serializers.CharField(min_length=8, write_only=True)
+    firstname = serializers.CharField()
+    lastname = serializers.CharField()
 
     class Meta:
         model = CustomUser
@@ -39,7 +42,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return FollowerSerializer(obj.users_following.all(), many=True).data
 
 
-class CommentSerializer(serializers.ModelSerializer):
+
+ class CommentSerializer(serializers.ModelSerializer):
     commented_by = serializers.ReadOnlyField(source='comment_author.username')
     class Meta:
         model = Comment
