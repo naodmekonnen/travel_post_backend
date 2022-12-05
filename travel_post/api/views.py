@@ -12,15 +12,10 @@ from rest_framework import status, permissions, generics
 from rest_framework.decorators import action
 
 
-
-
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-
-
 
 class UserCreate(APIView):
     permission_classes = (permissions.AllowAny,)

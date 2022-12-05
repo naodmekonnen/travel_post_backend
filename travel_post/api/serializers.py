@@ -9,8 +9,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
     username = serializers.CharField()
     password = serializers.CharField(min_length=8, write_only=True)
-    firstname = serializers.CharField()
-    lastname = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
 
     class Meta:
         model = CustomUser
@@ -43,7 +43,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 
- class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     commented_by = serializers.ReadOnlyField(source='comment_author.username')
     class Meta:
         model = Comment
