@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from .fields import *
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -58,6 +59,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    post_author = ForeignKeyField(queryset=CustomUser.objects.all(), serializer=CustomUserSerializer)
     comments = CommentSerializer(many=True,read_only=True)
     class Meta:
         model = Post
@@ -67,7 +69,8 @@ class PostSerializer(serializers.ModelSerializer):
                 'post_author',
                 'category',
                 'created_at',
-                'comments'
+                'comments',
+                'post_author'
                 )
 
 

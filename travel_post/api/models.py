@@ -31,6 +31,8 @@ class Post(models.Model):
     post_author = models.ForeignKey(CustomUser, on_delete=models.PROTECT, related_name='user_post')
     category = models.CharField(max_length=225, default=None, blank=True, null=True)
 
+    ordering = ["-created_at"]
+
     def __str__ (self):
         return self.body
 
@@ -39,6 +41,8 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     comment = models.CharField(max_length=1000)
     created_at = models.DateField(auto_now_add=True)
+
+    ordering = ["-created_at"]
 
     def __str__(self):
         return self.comment
