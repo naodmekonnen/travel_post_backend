@@ -55,5 +55,10 @@ class FollowViewSet(viewsets.ModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
 
+
+# class ImageViewSet(ModelViewSet):
+#     queryset = Image.objects.all()
+#     serializer_class = ImageSerializer
+
     
 

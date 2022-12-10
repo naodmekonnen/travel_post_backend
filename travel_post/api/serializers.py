@@ -75,6 +75,8 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
+    followers = ForeignKeyField(queryset=CustomUser.objects.all(), serializer=CustomUserSerializer)
+    followers = ForeignKeyField(queryset=CustomUser.objects.all(), serializer=CustomUserSerializer)
     class Meta:
         model = Follow
         fields = (
@@ -101,4 +103,10 @@ class FollowerSerializer(serializers.ModelSerializer):
             'following',
             'created_at',
         )
+
+
+# class ImageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Image
+#         fields = "__all__"
 

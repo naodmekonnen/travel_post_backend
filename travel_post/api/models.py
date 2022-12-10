@@ -25,8 +25,14 @@ class CustomUser(AbstractUser):
         return instance
 
 
+# class ProfileImage(models.Model):
+#     user = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
+#     image = models.ForeignKey(Image, on_delete=models.CASCADE)
+
+
 class Post(models.Model):
     body = models.CharField(max_length=550)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
     post_author = models.ForeignKey(CustomUser, on_delete=models.PROTECT, related_name='user_post')
     category = models.CharField(max_length=225, default=None, blank=True, null=True)
